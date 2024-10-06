@@ -1,0 +1,33 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def resume_form():
+    return render_template('resume_form.html')  # This renders the HTML form
+
+@app.route('/submit', methods=['POST'])
+def submit_resume():
+    name = request.form['name']
+    email = request.form['email']
+    phone = request.form['phone']
+    summary = request.form['summary']
+    experience = request.form['experience']
+    education = request.form['education']
+    skills = request.form['skills']
+
+    # Do something with the form data (save it, process it, etc.)
+    # For now, let's just display the submitted details
+    return f'''
+    <h2>Resume Details</h2>
+    <p><strong>Name:</strong> {name}</p>
+    <p><strong>Email:</strong> {email}</p>
+    <p><strong>Phone:</strong> {phone}</p>
+    <p><strong>Summary:</strong> {summary}</p>
+    <p><strong>Experience:</strong> {experience}</p>
+    <p><strong>Education:</strong> {education}</p>
+    <p><strong>Skills:</strong> {skills}</p>
+    '''
+
+if __name__ == '__main__':
+    app.run(debug=True)
